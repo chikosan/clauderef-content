@@ -1,0 +1,64 @@
+name: Ecosystem submission
+description: Propose a maintained Claude Code repository for the curated ecosystem.
+title: "[Ecosystem]: "
+labels: [ecosystem-submission]
+body:
+  - type: input
+    id: repository
+    attributes:
+      label: GitHub repository
+      placeholder: https://github.com/owner/repository
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: What does it help users accomplish?
+      description: Describe the concrete use case and who benefits.
+    validations:
+      required: true
+  - type: textarea
+    id: tags
+    attributes:
+      label: Suggested tags
+      description: List at least five existing taxonomy tags that make the project discoverable.
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      placeholder: MIT
+    validations:
+      required: true
+  - type: textarea
+    id: caution
+    attributes:
+      label: Meaningful cautions
+      description:
+        Note permissions, hosted dependencies, destructive capabilities, privacy, or maintenance
+        risks.
+    validations:
+      required: true
+  - type: checkboxes
+    id: eligibility
+    attributes:
+      label: Eligibility
+      options:
+        - label: The repository is public, not archived, and has at least 1,000 GitHub stars.
+          required: true
+        - label: The repository has activity within the previous year.
+          required: true
+        - label: I checked that this repository is not already listed or proposed.
+          required: true
+        - label: I have disclosed any affiliation with this project below.
+          required: true
+  - type: textarea
+    id: affiliation
+    attributes:
+      label: Affiliation
+      description:
+        State whether you maintain, work for, or are otherwise affiliated with this project. Write
+        “None” if not affiliated.
+    validations:
+      required: true

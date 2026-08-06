@@ -1,0 +1,53 @@
+name: Validate content
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-content-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: 1.3.14
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Audit dependencies
+        run: bun audit --audit-level=high
+
+      - name: Validate content
+        run: bun run validate
+
+      - name: Check formatting
+        run: bun run format:check
+
+      - name: Scan working tree for secrets
+        run: >-
+          docker run --rm --volume "$GITHUB_WORKSPACE:/repo:ro"
+          zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f
+          dir /repo --redact --no-banner
+
+      - name: Scan Git history for secrets
+        run: >-
+          docker run --rm --volume "$GITHUB_WORKSPACE:/repo:ro"
+          zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f
+          git /repo --log-opts=--all --redact --no-banner

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chikosan/clauderef-content/blob/main/schemas/ecosystem.schema.json",
+  "title": "ClaudeREF ecosystem index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["updated", "tagGroups", "projects"],
+  "properties": {
+    "updated": { "type": "string", "format": "date" },
+    "tagGroups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "tags"],
+        "properties": {
+          "id": { "$ref": "#/$defs/identifier" },
+          "label": { "$ref": "#/$defs/nonEmptyString" },
+          "tags": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "label", "description"],
+              "properties": {
+                "id": { "$ref": "#/$defs/identifier" },
+                "label": { "$ref": "#/$defs/nonEmptyString" },
+                "description": { "$ref": "#/$defs/nonEmptyString" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/project" }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "stringArray": { "type": "array", "items": { "type": "string" } },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slug",
+        "name",
+        "owner",
+        "repository",
+        "category",
+        "summary",
+        "bestFor",
+        "whyInteresting",
+        "caution",
+        "official",
+        "install",
+        "compatibility",
+        "tags",
+        "license",
+        "verified",
+        "starsAtVerification",
+        "lastPushedAt",
+        "source"
+      ],
+      "properties": {
+        "slug": { "$ref": "#/$defs/identifier" },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "owner": { "$ref": "#/$defs/nonEmptyString" },
+        "repository": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/?$" },
+        "category": { "$ref": "#/$defs/nonEmptyString" },
+        "summary": { "$ref": "#/$defs/nonEmptyString" },
+        "bestFor": { "$ref": "#/$defs/nonEmptyString" },
+        "whyInteresting": { "$ref": "#/$defs/nonEmptyString" },
+        "caution": { "$ref": "#/$defs/nonEmptyString" },
+        "official": { "type": "boolean" },
+        "install": { "$ref": "#/$defs/stringArray" },
+        "compatibility": { "$ref": "#/$defs/stringArray" },
+        "tags": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "icon": { "type": "string", "pattern": "^/images/ecosystem/.+\\.(svg|png|webp)$" },
+        "license": { "$ref": "#/$defs/nonEmptyString" },
+        "verified": { "type": "string", "format": "date" },
+        "starsAtVerification": { "type": "integer", "minimum": 1000 },
+        "lastPushedAt": { "type": "string", "format": "date" },
+        "source": {
+          "enum": ["awesome-claude-code", "clauderef-research", "community-submission"]
+        }
+      }
+    }
+  }
+}

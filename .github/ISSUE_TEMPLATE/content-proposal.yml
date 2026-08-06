@@ -1,0 +1,34 @@
+name: Content proposal
+description: Suggest a focused article, guide, or reference improvement.
+title: "[Proposal]: "
+labels: [content]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Reader need
+      description: Who needs this content and what should they understand or accomplish afterward?
+    validations:
+      required: true
+  - type: textarea
+    id: outline
+    attributes:
+      label: Proposed scope
+      description: Give a short outline and identify where it belongs.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Primary sources
+      description: Link the official material that would support the contribution.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I searched the current content and existing proposals first.
+          required: true
+        - label: I am willing to help draft or review this contribution.

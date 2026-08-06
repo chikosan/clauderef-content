@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/chikosan/clauderef-content/discussions
+    about: Discuss an idea before turning it into a focused contribution.
+  - name: Security vulnerability
+    url: https://github.com/chikosan/clauderef-content/security/policy
+    about: Read the private reporting instructions. Do not disclose vulnerabilities publicly.
+  - name: Official Anthropic support
+    url: https://support.anthropic.com/
+    about: Contact Anthropic for account, billing, or official product support.

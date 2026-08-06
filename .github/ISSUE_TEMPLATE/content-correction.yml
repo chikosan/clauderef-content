@@ -1,0 +1,41 @@
+name: Content correction
+description: Report inaccurate, outdated, unclear, or insufficiently sourced ClaudeREF content.
+title: "[Content]: "
+labels: [content]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: ClaudeREF page
+      placeholder: https://clauderef.com/…
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What needs correction?
+      description: Quote only the short passage needed to locate the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      description: Link official documentation, release notes, or source code when possible.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I checked for an existing report covering this correction.
+          required: true
+        - label: This report contains no credentials, private prompts, or personal data.
+          required: true
