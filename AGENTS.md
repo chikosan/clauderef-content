@@ -49,3 +49,15 @@ bun run format:check  # prettier must be clean
 
 `npm run validate` also works. An entry is not "done" until validation passes and a maintainer has
 reviewed the rendered page and diff.
+
+## Recurring docs check (the discovery loop)
+
+On a recurring basis (each content pass), check the **Claude Code docs index** for new or matured
+pages worth a library entry:
+
+- Docs index: <https://code.claude.com/docs/llms.txt>
+- Confirm each candidate page exists and the content is substantive (a real feature, not a stub).
+- Prefer pages that describe user-facing capabilities (new commands, settings, primitives) that
+  aren't already covered in `content/library/`.
+- For each picked page, write the entry using this repo's conventions (≥400 words, official source
+  link, no `medium.com` links) and capture the source URL so it can be traced back to this loop.
