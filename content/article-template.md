@@ -63,6 +63,14 @@ claude -p "Find every place we read process.env directly"
 
 Close with the one habit or change the reader should adopt.
 
+## Length
+
+Target the body word count: **at least 400 words, sweet spot 500–900 words**. Never below 350
+for a published article. Videos may be lighter, but still aim for 300+ words of genuine
+notes and interpretation — not a bare timestamp list. Depth beats padding: if a topic only
+merits a 300-word note, add real value or skip it rather than inflating for length.
+
+
 <!--
 AGENT CHECKLIST before saving:
 1. Filename is content/library/YYYY-MM-DD-slug.md, slug is kebab-case.

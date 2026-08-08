@@ -21,6 +21,10 @@ repo, which consumes this repo's content via `content-source.json`.
 3. Use a named Person as `author` (never `clauderef.com`).
 4. Body: use `##`/`###` headings (feed the TOC), keep sections short and scannable, bold-first-terms
    in lists. Raw HTML is escaped — markdown only.
+
+   Body length: **at least 400 words, sweet spot 500–900 words**, never below 350 for a published
+   article. Videos may be lighter, but aim for 300+ words of real notes/interpretation.
+
 5. Cover: put a 1280×720 jpg at `public/covers/<slug>.jpg` and set `cover: "/covers/<slug>.jpg"`, or
    omit `cover` to use the bundled fallback. If a cover is referenced, it must exist (validator
    checks it).
