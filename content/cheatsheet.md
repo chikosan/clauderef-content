@@ -1,6 +1,6 @@
 ---
-version: 2.1.221
-updated: 2026-08-04
+version: 2.1.229
+updated: 2026-08-13
 ---
 
 ## Keyboard Shortcuts
@@ -69,6 +69,8 @@ updated: 2026-08-04
 - `/add-dir <path>` — Add working directory to the session
   - Example: `/add-dir ../shared-lib` to edit a sibling repo in the same chat
 - `/teleport` — Pull a Claude Code web session into this terminal (/tp alias)
+- `/remote-control [name]` — Continue this local session from claude.ai or the Claude app (/rc alias)
+  - Example: `/remote-control feature-auth` keeps local tools available from another device
 - `/btw <question>` — Ask a side question without adding to the conversation
   - Example: `/btw what does ENOSPC mean?` — answer isn't stored in history
 - `/extra-usage` — Extra usage when rate limited
@@ -96,6 +98,10 @@ updated: 2026-08-04
 - `claude auth login` — Sign in (--sso, --console)
   - Example: `claude auth login --console` for API-console-based sign-in
 - `claude agents` — List agents
+- `claude remote-control` — Start a local Remote Control server (subscription login required)
+  - Example: `claude remote-control --continue` resumes the most recent Remote Control session
+- `claude self-hosted-runner` — Run web, mobile, and desktop sessions on your infrastructure (Team/Enterprise)
+  - Note: Windows requires an explicit `--base-dir`
 - `claude mcp` — MCP config
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
