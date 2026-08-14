@@ -6,6 +6,7 @@ type: article
 summary: "Sonnet 5 is stronger on many agentic and coding evaluations, but official results also show regressions and task-specific trade-offs against Sonnet 4.6."
 tags: [claude, models, benchmarks, workflow]
 author: "Shai Chikorel"
+cover: "/covers/sonnet-5-vs-sonnet-4-6-evidence.jpg"
 featured: false
 draft: false
 tldr:
