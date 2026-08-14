@@ -6,6 +6,7 @@ type: article
 summary: "Claude Code removed auto mode's opt-in consent step, but that is not the same as silently replacing every user's configured permission mode."
 tags: [claude-code, security, workflow, automation]
 author: "Shai Chikorel"
+cover: "/covers/claude-code-auto-mode-default-explained.jpg"
 featured: false
 draft: false
 tldr:

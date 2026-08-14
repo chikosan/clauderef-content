@@ -6,6 +6,7 @@ type: article
 summary: "Claude Code sends attribution metadata on some direct API traffic, but official sources do not support claims of an invisible signature in every generated file or response."
 tags: [claude-code, security, privacy, api]
 author: "Shai Chikorel"
+cover: "/covers/claude-code-attribution-header-not-watermark.jpg"
 featured: false
 draft: false
 tldr:

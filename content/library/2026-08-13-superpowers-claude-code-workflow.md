@@ -6,6 +6,7 @@ type: article
 summary: "Superpowers turns Claude Code into a design-first, test-driven workflow using composable skills, worktrees, subagents, and review gates."
 tags: [claude-code, skills, workflow, testing]
 author: "Shai Chikorel"
+cover: "/covers/superpowers-claude-code-workflow.jpg"
 featured: false
 draft: false
 tldr:
