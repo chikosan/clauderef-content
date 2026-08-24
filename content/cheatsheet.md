@@ -1,6 +1,6 @@
 ---
-version: 2.1.229
-updated: 2026-08-13
+version: 2.1.241
+updated: 2026-08-24
 ---
 
 ## Keyboard Shortcuts
@@ -102,9 +102,13 @@ updated: 2026-08-13
   - Example: `claude remote-control --continue` resumes the most recent Remote Control session
 - `claude self-hosted-runner` — Run web, mobile, and desktop sessions on your infrastructure (Team/Enterprise)
   - Note: Windows requires an explicit `--base-dir`
+  - Example: `claude self-hosted-runner --defer-shutdown-max-min 10` keeps attached sessions alive during shutdown
+  - Example: `claude self-hosted-runner --proxy-authorization-command ./mint-proxy-token` refreshes proxy authorization per connection
 - `claude mcp` — MCP config
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
+  - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
+- `claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
@@ -134,6 +138,7 @@ updated: 2026-08-13
   - Example: block `Bash(rm -rf *)` even when auto-mode is on
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
 - `workflowSizeGuideline` — Advise dynamic workflow size (unrestricted/small/medium/large)
+- `keybindingFlavor` — Set to `"readline"` for Bash-like word-editing shortcuts; `"classic"` remains the default
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
