@@ -1,6 +1,6 @@
 ---
 version: 2.1.241
-updated: 2026-08-24
+updated: 2026-08-25
 ---
 
 ## Keyboard Shortcuts
@@ -61,6 +61,7 @@ updated: 2026-08-24
 - `/ultrareview [PR#]` — Cloud code review — parallel multi-agent analysis
   - Example: `/ultrareview 42` runs multi-agent review on PR #42
 - `/deep-research <question>` — Run a cited, multi-agent web research workflow (manual invocation)
+- `/claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
 - `/security-review` — Scan diff for vulnerabilities (secrets, injection, authz)
   - Example: run before every `git push` on sensitive services
 - `/loop [interval] [prompt]` — Recurring task (/proactive alias)
@@ -108,7 +109,6 @@ updated: 2026-08-24
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
-- `claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
