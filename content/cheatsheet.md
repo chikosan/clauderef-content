@@ -1,6 +1,6 @@
 ---
-version: 2.1.241
-updated: 2026-08-25
+version: 2.1.250
+updated: 2026-08-28
 ---
 
 ## Keyboard Shortcuts
@@ -74,7 +74,7 @@ updated: 2026-08-25
   - Example: `/remote-control feature-auth` keeps local tools available from another device
 - `/btw <question>` — Ask a side question without adding to the conversation
   - Example: `/btw what does ENOSPC mean?` — answer isn't stored in history
-- `/extra-usage` — Extra usage when rate limited
+- `/usage-credits` — Configure usage credits or request more from an admin when limits block work (previously `/extra-usage`)
 - `/voice` — Toggle push-to-talk voice dictation
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
@@ -83,7 +83,7 @@ updated: 2026-08-25
 - `/rename [name]` — Rename current session
   - Example: `/rename feature-auth` so `claude -r feature-auth` finds it later
 - `/help` — Show help + commands
-- `/feedback` — Submit feedback (alias: /bug)
+- `/feedback [report]` — Report product feedback; with Claude-drafted feedback, no argument opens the drafts queue for review
 
 ## CLI & Flags
 
@@ -115,6 +115,8 @@ updated: 2026-08-25
   - Example: `claude ultrareview HEAD~5..HEAD` review last 5 commits from CI
 - `--model` — Set model
   - Example: `--model sonnet-4-20250514` overrides the default model
+- `--restricted` — Start a constrained evaluation/shared-machine session: no built-in command/code tools or WebFetch unless explicitly named, file tools stay inside working directories, only managed/`--settings` config loads, and `bypassPermissions` is refused (v2.1.248+)
+  - Example: `claude --restricted -p "inspect this repository"`
 - `--dangerously-skip-permissions` — Bypass permission prompts (use in CI only)
   - Example: pair with `--max-budget-usd` and a scoped sandbox
 - `--output-format json` — Structured output
@@ -134,6 +136,7 @@ updated: 2026-08-25
 - `.mcp.json` — Project MCP servers (checked in, shared)
 - `modelOverrides` — Map model picker labels → custom IDs
   - Example: `{"sonnet": "claude-sonnet-4-20250514"}`
+- `modelPicker` — Curate the ordered `/model` picker; the highest-precedence managed, `--settings`, or user definition wins as a whole list (v2.1.242+)
 - `autoMode.hard_deny` — Unconditional auto-mode classifier deny rules
   - Example: block `Bash(rm -rf *)` even when auto-mode is on
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
