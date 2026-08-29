@@ -37,6 +37,9 @@ updated: 2026-08-29
   - Example: `/branch spike-refactor` fork current chat to try an idea safely
 - `/usage` — Token usage, cost and cache breakdown (replaces /cost, /stats)
   - Example: `/usage` shows input, output and cache hit counts
+- `/usage-credits` — Request higher usage limits where the organization supports credits
+- `/resume` — Pick up an earlier conversation; desktop can reopen terminal sessions
+- `/color [name]` — Set the current session's prompt color
 - `/context` — Visualize context (grid)
   - Example: spot which files are hogging the window before `/compact`
 - `/diff` — Interactive diff viewer
@@ -50,6 +53,7 @@ updated: 2026-08-29
   - Example: `/memory` then pick "project" to add a repo-wide rule
 - `/mcp` — Manage MCP servers (list, add, remove, auth)
 - `/hooks` — Manage pre/post tool hooks
+- `/permissions` — Review permission rules and Auto mode classifier rules
   - Example: add a hook that runs `bun test` after every Edit
 - `/skills` — List available skills (built-in + project + personal)
 - `/reload-skills` — Reload skills without restarting the session
@@ -99,8 +103,9 @@ updated: 2026-08-29
   - Example: `claude auth login --console` for API-console-based sign-in
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
-- `claude remote-control` — Start a local Remote Control server (subscription login required)
+- `claude remote-control` (`claude rc`) — Start a local Remote Control server (subscription login required)
   - Example: `claude remote-control --continue` resumes the most recent Remote Control session
+  - Note: the Claude mobile app can start or continue a session on a connected machine
 - `claude self-hosted-runner` — Run web, mobile, and desktop sessions on your infrastructure (Team/Enterprise)
   - Note: Windows requires an explicit `--base-dir`
   - Example: `claude self-hosted-runner --defer-shutdown-max-min 10` keeps attached sessions alive during shutdown
@@ -110,6 +115,7 @@ updated: 2026-08-29
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
 - `claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
+- `claude-api cost-optimize` — Measure API spend and apply caching, batching, effort, or model changes one at a time
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
@@ -143,6 +149,7 @@ updated: 2026-08-29
 - `workflowSizeGuideline` — Advise dynamic workflow size (unrestricted/small/medium/large)
 - `keybindingFlavor` — Set to `"readline"` for Bash-like word-editing shortcuts; `"classic"` remains the default
 - `feedbackDrafts` — Control automatic feedback drafts after failures
+- `promptCacheTtl` — Set API/cloud prompt-cache lifetime to `5m` or `1h`
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
