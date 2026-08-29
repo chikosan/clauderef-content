@@ -1,6 +1,6 @@
 ---
-version: 2.1.241
-updated: 2026-08-24
+version: 2.1.251
+updated: 2026-08-29
 ---
 
 ## Keyboard Shortcuts
@@ -98,6 +98,7 @@ updated: 2026-08-24
 - `claude auth login` — Sign in (--sso, --console)
   - Example: `claude auth login --console` for API-console-based sign-in
 - `claude agents` — List agents
+- `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
 - `claude remote-control` — Start a local Remote Control server (subscription login required)
   - Example: `claude remote-control --continue` resumes the most recent Remote Control session
 - `claude self-hosted-runner` — Run web, mobile, and desktop sessions on your infrastructure (Team/Enterprise)
@@ -115,6 +116,8 @@ updated: 2026-08-24
   - Example: `claude ultrareview HEAD~5..HEAD` review last 5 commits from CI
 - `--model` — Set model
   - Example: `--model sonnet-4-20250514` overrides the default model
+- `--restricted` — Run with command/code tools and WebFetch disabled unless explicitly allowed
+  - Example: `claude --restricted` keeps file access inside the working directory
 - `--dangerously-skip-permissions` — Bypass permission prompts (use in CI only)
   - Example: pair with `--max-budget-usd` and a scoped sandbox
 - `--output-format json` — Structured output
@@ -139,6 +142,7 @@ updated: 2026-08-24
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
 - `workflowSizeGuideline` — Advise dynamic workflow size (unrestricted/small/medium/large)
 - `keybindingFlavor` — Set to `"readline"` for Bash-like word-editing shortcuts; `"classic"` remains the default
+- `feedbackDrafts` — Control automatic feedback drafts after failures
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
