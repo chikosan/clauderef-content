@@ -1,6 +1,6 @@
 ---
 version: 2.1.251
-updated: 2026-08-29
+updated: 2026-08-31
 ---
 
 ## Keyboard Shortcuts
@@ -33,8 +33,8 @@ updated: 2026-08-29
   - Tip: use before switching topics
 - `/compact [focus]` — Compact context
   - Example: `/compact focus` keeps only the current task context
-- `/branch [name]` — Branch conversation (/fork alias)
-  - Example: `/branch spike-refactor` fork current chat to try an idea safely
+- `/branch [name]` — Branch the current conversation and switch into the branch
+  - Example: `/branch spike-refactor` keeps the original available in `/resume`; use `/fork` for a separate background copy
 - `/usage` — Token usage, cost and cache breakdown (replaces /cost, /stats)
   - Example: `/usage` shows input, output and cache hit counts
 - `/usage-credits` — Request higher usage limits where the organization supports credits
@@ -77,7 +77,6 @@ updated: 2026-08-29
   - Example: `/remote-control feature-auth` keeps local tools available from another device
 - `/btw <question>` — Ask a side question without adding to the conversation
   - Example: `/btw what does ENOSPC mean?` — answer isn't stored in history
-- `/extra-usage` — Extra usage when rate limited
 - `/voice` — Toggle push-to-talk voice dictation
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
@@ -86,7 +85,9 @@ updated: 2026-08-29
 - `/rename [name]` — Rename current session
   - Example: `/rename feature-auth` so `claude -r feature-auth` finds it later
 - `/help` — Show help + commands
-- `/feedback` — Submit feedback (alias: /bug)
+- `/feedback [report]` — Send product feedback; without an argument, may open the Claude-drafted feedback queue where enabled
+- `/claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
+- `/claude-api cost-optimize` — Profile API spend and propose savings from caching, token reduction, batching, effort, or model choice
 
 ## CLI & Flags
 
@@ -114,8 +115,6 @@ updated: 2026-08-29
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
-- `claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
-- `claude-api cost-optimize` — Measure API spend and apply caching, batching, effort, or model changes one at a time
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
