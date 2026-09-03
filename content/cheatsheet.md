@@ -1,6 +1,6 @@
 ---
-version: 2.1.251
-updated: 2026-08-31
+version: 2.1.258
+updated: 2026-09-03
 ---
 
 ## Keyboard Shortcuts
