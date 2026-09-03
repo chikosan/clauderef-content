@@ -1,5 +1,6 @@
 ---
 title: "A 20-minute tour of Claude Code power workflows"
+cover: "/covers/claude-code-power-workflow.jpg"
 date: 2026-07-30
 time: "18:40"
 type: video
