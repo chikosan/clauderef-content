@@ -1,6 +1,6 @@
 ---
-version: 2.1.258
-updated: 2026-09-03
+version: 2.1.261
+updated: 2026-09-05
 ---
 
 ## Keyboard Shortcuts
@@ -44,6 +44,9 @@ updated: 2026-09-03
   - Example: spot which files are hogging the window before `/compact`
 - `/diff` — Interactive diff viewer
   - Example: review staged changes before saying "yes" to an edit
+- `/advisor [model|off]` — Consult a second model for guidance at key moments
+- `/reload-plugins [--force]` — Reload active plugins without restarting
+- `/skill-doctor` — Find unused skills and their context cost
 - `/keybindings` — Customize keyboard shortcuts
 - `/scroll-speed [speed]` — Adjust output scroll speed
 - `/terminal-setup` — Configure terminal keybindings
@@ -125,6 +128,9 @@ updated: 2026-09-03
   - Example: `claude --restricted` keeps file access inside the working directory
 - `--dangerously-skip-permissions` — Bypass permission prompts (use in CI only)
   - Example: pair with `--max-budget-usd` and a scoped sandbox
+- `--permission-prompts none` — Deny permission prompts in unattended print mode
+  - Example: `claude -p --permission-prompts none "run tests"`
+- `--append-subagent-system-prompt-file <path>` — Append a file to every subagent prompt
 - `--output-format json` — Structured output
   - Example: `claude -p "list files" --output-format json | jq`
 - `--forward-subagent-text` — Include nested subagent text in verbose stream-json output
