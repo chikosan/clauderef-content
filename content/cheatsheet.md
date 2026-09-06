@@ -1,6 +1,6 @@
 ---
 version: 2.1.261
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 ## Keyboard Shortcuts
@@ -35,8 +35,8 @@ updated: 2026-09-05
   - Example: `/compact focus` keeps only the current task context
 - `/branch [name]` — Branch the current conversation and switch into the branch
   - Example: `/branch spike-refactor` keeps the original available in `/resume`; use `/fork` for a separate background copy
-- `/usage` — Token usage, cost and cache breakdown (replaces /cost, /stats)
-  - Example: `/usage` shows input, output and cache hit counts
+- `/usage` — Show session cost, plan usage limits, and activity stats (`/cost` and `/stats` aliases)
+  - Example: `/usage` shows current cost, usage limits, and activity stats
 - `/usage-credits` — Request higher usage limits where the organization supports credits
 - `/resume` — Pick up an earlier conversation; desktop can reopen terminal sessions
 - `/color [name]` — Set the current session's prompt color
@@ -60,11 +60,11 @@ updated: 2026-09-05
   - Example: add a hook that runs `bun test` after every Edit
 - `/skills` — List available skills (built-in + project + personal)
 - `/reload-skills` — Reload skills without restarting the session
-- `/agents` — Manage agent configurations (list, create, edit)
+- `/agents` — Show guidance for creating or managing subagents; ask Claude or edit agent files directly
 - `/workflows` — View and manage background multi-agent workflow runs
-- `/review [PR]` — Review PR locally
-  - Example: `/review` reviews current branch diff
-  - Example: `/review 128` reviews PR #128 against main
+- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
+  - Example: `/review` reviews the current diff
+  - Example: `/review high --fix 128` reviews PR #128 at high effort and applies fixes
 - `/ultrareview [PR#]` — Cloud code review — parallel multi-agent analysis
   - Example: `/ultrareview 42` runs multi-agent review on PR #42
 - `/deep-research <question>` — Run a cited, multi-agent web research workflow (manual invocation)
@@ -152,7 +152,6 @@ updated: 2026-09-05
   - Example: block `Bash(rm -rf *)` even when auto-mode is on
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
 - `workflowSizeGuideline` — Advise dynamic workflow size (unrestricted/small/medium/large)
-- `keybindingFlavor` — Set to `"readline"` for Bash-like word-editing shortcuts; `"classic"` remains the default
 - `feedbackDrafts` — Control automatic feedback drafts after failures
 - `promptCacheTtl` — Set API/cloud prompt-cache lifetime to `5m` or `1h`
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
