@@ -1,6 +1,6 @@
 ---
-version: 2.1.261
-updated: 2026-09-06
+version: 2.1.268
+updated: 2026-09-11
 ---
 
 ## Keyboard Shortcuts
@@ -84,6 +84,7 @@ updated: 2026-09-06
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
 - `/insights` — Analyze sessions report
+- `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
 - `/rename [name]` — Rename current session
   - Example: `/rename feature-auth` so `claude -r feature-auth` finds it later
@@ -105,6 +106,7 @@ updated: 2026-09-06
   - Example: `claude update` pulls latest CLI; pairs with `/doctor`
 - `claude auth login` — Sign in (--sso, --console)
   - Example: `claude auth login --console` for API-console-based sign-in
+- `claude auth status [--text]` — Report authentication status as JSON, or human-readable text
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
 - `claude remote-control` (`claude rc`) — Start a local Remote Control server (subscription login required)
@@ -114,10 +116,12 @@ updated: 2026-09-06
   - Note: Windows requires an explicit `--base-dir`
   - Example: `claude self-hosted-runner --defer-shutdown-max-min 10` keeps attached sessions alive during shutdown
   - Example: `claude self-hosted-runner --proxy-authorization-command ./mint-proxy-token` refreshes proxy authorization per connection
+  - Example: `claude self-hosted-runner --remove-session-state` deletes per-session state after each session ends
 - `claude mcp` — MCP config
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
+  - Example: `claude plugin update formatter@your-org --json` returns structured automation output
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
@@ -131,6 +135,7 @@ updated: 2026-09-06
 - `--permission-prompts none` — Deny permission prompts in unattended print mode
   - Example: `claude -p --permission-prompts none "run tests"`
 - `--append-subagent-system-prompt-file <path>` — Append a file to every subagent prompt
+- `--system-prompt-snapshot off` — Rebuild the system prompt on every request while iterating on prompt text
 - `--output-format json` — Structured output
   - Example: `claude -p "list files" --output-format json | jq`
 - `--forward-subagent-text` — Include nested subagent text in verbose stream-json output
@@ -148,6 +153,7 @@ updated: 2026-09-06
 - `.mcp.json` — Project MCP servers (checked in, shared)
 - `modelOverrides` — Map model picker labels → custom IDs
   - Example: `{"sonnet": "claude-sonnet-4-20250514"}`
+- `maxEffortLevel` — Cap the highest effort users can select globally or per model
 - `autoMode.hard_deny` — Unconditional auto-mode classifier deny rules
   - Example: block `Bash(rm -rf *)` even when auto-mode is on
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
@@ -169,6 +175,7 @@ updated: 2026-09-06
   - Example: `MAX_THINKING_TOKENS=32000 claude -p "deep reasoning task"`
 - `API_TIMEOUT_MS` — API timeout (default 600000ms)
   - Example: bump to `1200000` for very long reasoning runs
+- `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
