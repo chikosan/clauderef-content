@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04",
+  "updated": "2026-09-11",
   "tagGroups": [
     {
       "id": "goals",
@@ -1592,6 +1592,37 @@
       "source": "clauderef-research",
       "starsAtVerification": 202877,
       "lastPushedAt": "2026-08-04"
+    },
+    {
+      "slug": "archify",
+      "name": "Archify",
+      "owner": "tt-a1i",
+      "repository": "https://github.com/tt-a1i/archify",
+      "category": "skill",
+      "official": false,
+      "summary": "Archify turns a system description or repository analysis into a validated, self-contained interactive architecture diagram. Its typed JSON pipeline supports architecture, workflow, sequence, data-flow, and lifecycle views with theme switching, relationship tracing, and image or video export. It complements compact Mermaid diagrams when a team needs a richer review or presentation artifact.",
+      "bestFor": "Developers who want polished, interactive system maps with deterministic structural checks and optional source evidence.",
+      "whyInteresting": "It separates agent-authored topology from deterministic rendering and validation, then packages the result as a portable HTML artifact across multiple coding-agent runtimes.",
+      "caution": "Validation can check schemas, routes, and layout but cannot prove that repository analysis found the complete deployed architecture. Review modeled claims and note that the skill performs an optional periodic manifest check unless ARCHIFY_UPDATE_CHECK_DISABLED=1 is set.",
+      "install": ["npx skills add tt-a1i/archify -g"],
+      "compatibility": ["Claude Code", "Codex", "Cursor", "OpenCode", "Raven"],
+      "tags": [
+        "improve-ui",
+        "automate-work",
+        "review-code",
+        "skill",
+        "ui-design",
+        "testing",
+        "web",
+        "local-first",
+        "cross-agent",
+        "dev-tool"
+      ],
+      "license": "MIT",
+      "verified": "2026-09-11",
+      "source": "clauderef-research",
+      "starsAtVerification": 58226,
+      "lastPushedAt": "2026-09-11"
     }
   ]
 }
