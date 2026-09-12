@@ -1,6 +1,6 @@
 ---
-version: 2.1.268
-updated: 2026-09-11
+version: 2.1.269
+updated: 2026-09-12
 ---
 
 ## Keyboard Shortcuts
@@ -33,6 +33,8 @@ updated: 2026-09-11
   - Tip: use before switching topics
 - `/compact [focus]` — Compact context
   - Example: `/compact focus` keeps only the current task context
+- `/output-style [name]` — List output styles or switch the current session's style
+  - Example: `/output-style Explanatory` applies that style starting with the next message
 - `/branch [name]` — Branch the current conversation and switch into the branch
   - Example: `/branch spike-refactor` keeps the original available in `/resume`; use `/fork` for a separate background copy
 - `/usage` — Show session cost, plan usage limits, and activity stats (`/cost` and `/stats` aliases)
@@ -122,6 +124,8 @@ updated: 2026-09-11
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
   - Example: `claude plugin update formatter@your-org --json` returns structured automation output
+- `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
+  - Example: `claude plugin eval . --case routing --runs 3` tests one case from the current plugin
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
@@ -176,6 +180,7 @@ updated: 2026-09-11
 - `API_TIMEOUT_MS` — API timeout (default 600000ms)
   - Example: bump to `1200000` for very long reasoning runs
 - `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
+- `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
