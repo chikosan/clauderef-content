@@ -33,8 +33,6 @@ updated: 2026-09-12
   - Tip: use before switching topics
 - `/compact [focus]` — Compact context
   - Example: `/compact focus` keeps only the current task context
-- `/output-style [name]` — List output styles or switch the current session's style
-  - Example: `/output-style Explanatory` applies that style starting with the next message
 - `/branch [name]` — Branch the current conversation and switch into the branch
   - Example: `/branch spike-refactor` keeps the original available in `/resume`; use `/fork` for a separate background copy
 - `/usage` — Show session cost, plan usage limits, and activity stats (`/cost` and `/stats` aliases)
