@@ -1,6 +1,6 @@
 ---
-version: 2.1.261
-updated: 2026-09-05
+version: 2.1.269
+updated: 2026-09-12
 ---
 
 ## Keyboard Shortcuts
@@ -35,8 +35,8 @@ updated: 2026-09-05
   - Example: `/compact focus` keeps only the current task context
 - `/branch [name]` — Branch the current conversation and switch into the branch
   - Example: `/branch spike-refactor` keeps the original available in `/resume`; use `/fork` for a separate background copy
-- `/usage` — Token usage, cost and cache breakdown (replaces /cost, /stats)
-  - Example: `/usage` shows input, output and cache hit counts
+- `/usage` — Show session cost, plan usage limits, and activity stats (`/cost` and `/stats` aliases)
+  - Example: `/usage` shows current cost, usage limits, and activity stats
 - `/usage-credits` — Request higher usage limits where the organization supports credits
 - `/resume` — Pick up an earlier conversation; desktop can reopen terminal sessions
 - `/color [name]` — Set the current session's prompt color
@@ -60,11 +60,11 @@ updated: 2026-09-05
   - Example: add a hook that runs `bun test` after every Edit
 - `/skills` — List available skills (built-in + project + personal)
 - `/reload-skills` — Reload skills without restarting the session
-- `/agents` — Manage agent configurations (list, create, edit)
+- `/agents` — Show guidance for creating or managing subagents; ask Claude or edit agent files directly
 - `/workflows` — View and manage background multi-agent workflow runs
-- `/review [PR]` — Review PR locally
-  - Example: `/review` reviews current branch diff
-  - Example: `/review 128` reviews PR #128 against main
+- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
+  - Example: `/review` reviews the current diff
+  - Example: `/review high --fix 128` reviews PR #128 at high effort and applies fixes
 - `/ultrareview [PR#]` — Cloud code review — parallel multi-agent analysis
   - Example: `/ultrareview 42` runs multi-agent review on PR #42
 - `/deep-research <question>` — Run a cited, multi-agent web research workflow (manual invocation)
@@ -84,6 +84,7 @@ updated: 2026-09-05
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
 - `/insights` — Analyze sessions report
+- `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
 - `/rename [name]` — Rename current session
   - Example: `/rename feature-auth` so `claude -r feature-auth` finds it later
@@ -105,6 +106,7 @@ updated: 2026-09-05
   - Example: `claude update` pulls latest CLI; pairs with `/doctor`
 - `claude auth login` — Sign in (--sso, --console)
   - Example: `claude auth login --console` for API-console-based sign-in
+- `claude auth status [--text]` — Report authentication status as JSON, or human-readable text
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
 - `claude remote-control` (`claude rc`) — Start a local Remote Control server (subscription login required)
@@ -114,10 +116,14 @@ updated: 2026-09-05
   - Note: Windows requires an explicit `--base-dir`
   - Example: `claude self-hosted-runner --defer-shutdown-max-min 10` keeps attached sessions alive during shutdown
   - Example: `claude self-hosted-runner --proxy-authorization-command ./mint-proxy-token` refreshes proxy authorization per connection
+  - Example: `claude self-hosted-runner --remove-session-state` deletes per-session state after each session ends
 - `claude mcp` — MCP config
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
+  - Example: `claude plugin update formatter@your-org --json` returns structured automation output
+- `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
+  - Example: `claude plugin eval . --case routing --runs 3` tests one case from the current plugin
 - `claude project purge [path]` — Delete all Claude project state
   - Example: `claude project purge .` wipes local session/memory for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
@@ -131,6 +137,7 @@ updated: 2026-09-05
 - `--permission-prompts none` — Deny permission prompts in unattended print mode
   - Example: `claude -p --permission-prompts none "run tests"`
 - `--append-subagent-system-prompt-file <path>` — Append a file to every subagent prompt
+- `--system-prompt-snapshot off` — Rebuild the system prompt on every request while iterating on prompt text
 - `--output-format json` — Structured output
   - Example: `claude -p "list files" --output-format json | jq`
 - `--forward-subagent-text` — Include nested subagent text in verbose stream-json output
@@ -148,11 +155,11 @@ updated: 2026-09-05
 - `.mcp.json` — Project MCP servers (checked in, shared)
 - `modelOverrides` — Map model picker labels → custom IDs
   - Example: `{"sonnet": "claude-sonnet-4-20250514"}`
+- `maxEffortLevel` — Cap the highest effort users can select globally or per model
 - `autoMode.hard_deny` — Unconditional auto-mode classifier deny rules
   - Example: block `Bash(rm -rf *)` even when auto-mode is on
 - `emojiCompletionEnabled` — Enable `:shortcode:` emoji completion (default true)
 - `workflowSizeGuideline` — Advise dynamic workflow size (unrestricted/small/medium/large)
-- `keybindingFlavor` — Set to `"readline"` for Bash-like word-editing shortcuts; `"classic"` remains the default
 - `feedbackDrafts` — Control automatic feedback drafts after failures
 - `promptCacheTtl` — Set API/cloud prompt-cache lifetime to `5m` or `1h`
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
@@ -170,6 +177,8 @@ updated: 2026-09-05
   - Example: `MAX_THINKING_TOKENS=32000 claude -p "deep reasoning task"`
 - `API_TIMEOUT_MS` — API timeout (default 600000ms)
   - Example: bump to `1200000` for very long reasoning runs
+- `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
+- `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
