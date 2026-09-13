@@ -1,6 +1,6 @@
 ---
 version: 2.1.269
-updated: 2026-09-12
+updated: 2026-09-13
 ---
 
 ## Keyboard Shortcuts
@@ -92,6 +92,8 @@ updated: 2026-09-12
 - `/feedback [report]` — Send product feedback; without an argument, may open the Claude-drafted feedback queue where enabled
 - `/claude-api upgrade` — Migrate Python projects from the Anthropic SDK 0.x API to 1.x
 - `/claude-api cost-optimize` — Profile API spend and propose savings from caching, token reduction, batching, effort, or model choice
+- `/claude-api build-eval` — Build an eval set for a Claude-powered app (v2.1.259+)
+- `/claude-api hillclimb` — Iteratively improve a Claude-powered app against an existing eval set (v2.1.259+)
 
 ## CLI & Flags
 
