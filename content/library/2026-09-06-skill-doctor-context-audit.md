@@ -6,9 +6,9 @@ type: article
 tags: [claude-code, skills, context, workflow]
 summary: "A practical, reversible workflow for using Claude Code's /skill-doctor report to find unused skill listings, reduce context overhead, and keep the skills that earn their place."
 author: "Shai Chikorel"
+source: "https://code.claude.com/docs/en/skills#find-unused-skills"
 cover: "/covers/skill-doctor-context-audit.jpg"
 featured: false
-draft: true
 tldr:
   - "/skill-doctor identifies loaded skills that have gone unused and shows their context cost; it does not prove a skill is useless."
   - "Use the report to make a small, reversible change, then retest a real task before removing more skills."
@@ -24,10 +24,12 @@ automatically bad. A release-only skill, a migration playbook, or an incident-re
 may be exactly the thing you need once a quarter.
 
 The useful question is narrower: **which skills are paying a context cost in ordinary sessions
-without helping the work you actually do?** Claude Code v2.1.261 added `/skill-doctor` for that
-question. It reports loaded skills that have gone unused and their context cost, so you can decide
-which ones to prune. [Anthropic's v2.1.261 release notes](https://github.com/anthropics/claude-code/releases/tag/v2.1.261)
-are the source of truth for the command's availability and purpose.
+without helping the work you actually do?** Anthropic announced `/skill-doctor` in the v2.1.261
+release notes, while the current skills reference lists v2.1.252 or later as the minimum version.
+It reports loaded skills that have gone unused and their context cost, so you can decide which ones
+to prune. [Anthropic's v2.1.261 release notes](https://github.com/anthropics/claude-code/releases/tag/v2.1.261)
+and the [current skills reference](https://code.claude.com/docs/en/skills#find-unused-skills)
+document the command's rollout, availability, and purpose.
 
 Run it at the end of a representative terminal session:
 
