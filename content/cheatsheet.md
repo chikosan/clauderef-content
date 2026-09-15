@@ -1,6 +1,6 @@
 ---
-version: 2.1.269
-updated: 2026-09-13
+version: 2.1.271
+updated: 2026-09-15
 ---
 
 ## Keyboard Shortcuts
@@ -86,6 +86,8 @@ updated: 2026-09-13
 - `/insights` — Analyze sessions report
 - `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
+- `/fast [on|off]` — Toggle faster responses where your plan and organization allow them
+  - Note: v2.1.271 extends fast mode to Remote sessions on cloud and self-hosted runners
 - `/rename [name]` — Rename current session
   - Example: `/rename feature-auth` so `claude -r feature-auth` finds it later
 - `/help` — Show help + commands
@@ -117,6 +119,8 @@ updated: 2026-09-13
 - `claude self-hosted-runner` — Run web, mobile, and desktop sessions on your infrastructure (Team/Enterprise)
   - Note: Windows requires an explicit `--base-dir`
   - Example: `claude self-hosted-runner --defer-shutdown-max-min 10` keeps attached sessions alive during shutdown
+  - Example: `claude self-hosted-runner --drain-marker-file /run/claude/host-drain` labels an operator-initiated drain for telemetry
+  - Example: `claude self-hosted-runner --host-config-snapshot disk` verifies a disk-backed host-config snapshot per session
   - Example: `claude self-hosted-runner --proxy-authorization-command ./mint-proxy-token` refreshes proxy authorization per connection
   - Example: `claude self-hosted-runner --remove-session-state` deletes per-session state after each session ends
 - `claude mcp` — MCP config
@@ -124,6 +128,7 @@ updated: 2026-09-13
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
   - Example: `claude plugin update formatter@your-org --json` returns structured automation output
+  - Example: review `shownCommand`, then pass its SHA-256 with `--accept-command <sha256>` to approve exactly that command
 - `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
   - Example: `claude plugin eval . --case routing --runs 3` tests one case from the current plugin
 - `claude project purge [path]` — Delete all Claude project state
@@ -257,6 +262,7 @@ updated: 2026-09-13
 - `maxTurns` — Cap agentic turns to prevent runaway loops
   - Example: `maxTurns: 20`
 - `initialPrompt` — Auto-submit the first turn on agent start
+- `omitClaudeMd: true` — Skip user, project, and local CLAUDE.md files for focused subagents; managed policy still loads
 - `SendMessage` — Resume a running agent (replaces the older `resume`)
 - `@agent-name` — Mention a named subagent from the main chat
   - Example: `@reviewer take a look at this diff`
