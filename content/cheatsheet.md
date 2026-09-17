@@ -1,6 +1,6 @@
 ---
-version: 2.1.271
-updated: 2026-09-15
+version: 2.1.274
+updated: 2026-09-17
 ---
 
 ## Keyboard Shortcuts
@@ -185,7 +185,10 @@ updated: 2026-09-15
 - `API_TIMEOUT_MS` — API timeout (default 600000ms)
   - Example: bump to `1200000` for very long reasoning runs
 - `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
+- `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
+- `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
+- `claude_code.llm_request` — OTel request span includes the applied `effort` level when the model supports effort
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
