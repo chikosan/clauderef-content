@@ -1,6 +1,6 @@
 ---
-version: 2.1.274
-updated: 2026-09-17
+version: 2.1.276
+updated: 2026-09-18
 ---
 
 ## Keyboard Shortcuts
@@ -127,6 +127,7 @@ updated: 2026-09-17
   - Example: `claude mcp add github --transport http https://mcp.github.com`
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
+  - Example: `claude plugin install formatter --marketplace your-org` offers to add the marketplace before installing
   - Example: `claude plugin update formatter@your-org --json` returns structured automation output
   - Example: review `shownCommand`, then pass its SHA-256 with `--accept-command <sha256>` to approve exactly that command
 - `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
@@ -187,6 +188,9 @@ updated: 2026-09-17
 - `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
 - `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
 - `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
+- `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
+- `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
+- `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
 - `claude_code.llm_request` — OTel request span includes the applied `effort` level when the model supports effort
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
