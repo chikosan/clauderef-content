@@ -1,6 +1,6 @@
 ---
-version: 2.1.276
-updated: 2026-09-18
+version: 2.1.278
+updated: 2026-09-19
 ---
 
 ## Keyboard Shortcuts
@@ -58,6 +58,8 @@ updated: 2026-09-18
 - `/hooks` — Manage pre/post tool hooks
 - `/permissions` — Review permission rules and Auto mode classifier rules
   - Example: add a hook that runs `bun test` after every Edit
+- `/config` — Open Claude Code configuration, including the project-instruction choice
+  - Note: in a project without `CLAUDE.md`, Claude Code can read `AGENTS.md` as project instructions
 - `/skills` — List available skills (built-in + project + personal)
 - `/reload-skills` — Reload skills without restarting the session
 - `/agents` — Show guidance for creating or managing subagents; ask Claude or edit agent files directly
@@ -189,6 +191,8 @@ updated: 2026-09-18
 - `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
 - `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
 - `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
+- `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
+- `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
 - `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
 - `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
