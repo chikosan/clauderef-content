@@ -39,11 +39,13 @@ bun run validate
 bun run format:check
 ```
 
-CI runs the same checks, dependency auditing, and secret scanning. A pull request cannot modify or
-deploy the private website. The opted-in daily automation can merge its own independently reviewed
-content after exact-head CI passes; external contributions still require maintainer approval. After
-a content change is merged, the private website repository imports the reviewed snapshot through a
-separate pull request, then deploys the verified app commit through Coolify.
+The signed external `ci/hetzner` check runs the same checks, dependency auditing, and secret
+scanning on each pull request's exact head. GitHub Actions validation can be dispatched manually. A
+pull request cannot modify or deploy the private website. The opted-in daily automation can merge
+its own independently reviewed content after exact-head CI passes; external contributions still
+require maintainer approval. After a content change is merged, the private website repository
+imports the reviewed snapshot through a separate pull request, then deploys the verified app commit
+through Coolify.
 
 ## Licensing
 
