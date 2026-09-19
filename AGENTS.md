@@ -10,8 +10,12 @@ repo, which consumes this repo's content via `content-source.json`.
   repo; add content here and it syncs upstream.
 - **Verify before claiming done.** Check product claims against a primary source (official docs,
   release notes, the actual GitHub repo) — stars/agent counts in blog posts go stale fast.
-- **Never publish an unreviewed AI draft.** Keep unverified or unfinished entries `draft: true`, and
-  do not commit until a maintainer has reviewed.
+- **Never publish an unreviewed AI draft.** Keep unverified or unfinished entries `draft: true`.
+  External contributions require maintainer review. The maintainer opted the daily ClaudeREF
+  automation into autonomous publishing on 2026-09-19: it may commit and merge its own English
+  entries only after a separate source-by-source editorial review, rendered desktop/375px mobile
+  inspection, and successful exact-head validation and CI. Do not auto-publish AI-only locale
+  translations, ambiguous claims, or unrelated pull requests.
 
 ## Adding an article (content/library/)
 
@@ -47,8 +51,10 @@ bun run validate      # required before considering an entry done
 bun run format:check  # prettier must be clean
 ```
 
-`npm run validate` also works. An entry is not "done" until validation passes and a maintainer has
-reviewed the rendered page and diff.
+`npm run validate` also works. An entry is not "done" until validation passes and its rendered page
+and exact diff are reviewed. For the opted-in daily automation, that review may be independent agent
+review instead of maintainer approval. If required CI cannot run, including a billing or
+spending-limit failure, stop before merge; local checks are not a substitute.
 
 ## Recurring docs check (the discovery loop)
 
