@@ -1,6 +1,6 @@
 ---
-version: 2.1.278
-updated: 2026-09-19
+version: 2.1.280
+updated: 2026-09-23
 ---
 
 ## Keyboard Shortcuts
@@ -139,6 +139,7 @@ updated: 2026-09-19
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
   - Example: `claude ultrareview HEAD~5..HEAD` review last 5 commits from CI
 - `--model` — Set model
+  - Note: Claude Opus 5.5 (`claude-opus-5-5`) is the default Opus model in v2.1.280; 1M context, $4/Mtok input, $20/Mtok output, $0.20/Mtok cache reads
   - Example: `--model sonnet-4-20250514` overrides the default model
 - `--restricted` — Run with command/code tools and WebFetch disabled unless explicitly allowed
   - Example: `claude --restricted` keeps file access inside the working directory
@@ -191,6 +192,7 @@ updated: 2026-09-19
 - `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
 - `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
 - `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
+- `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` — Override the 2,048-character cap on MCP tool descriptions and server instructions (v2.1.280+)
 - `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
 - `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
 - `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
