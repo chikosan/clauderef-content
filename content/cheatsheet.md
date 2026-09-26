@@ -1,6 +1,6 @@
 ---
-version: 2.1.280
-updated: 2026-09-23
+version: 2.1.283
+updated: 2026-09-26
 ---
 
 ## Keyboard Shortcuts
@@ -85,6 +85,7 @@ updated: 2026-09-23
 - `/voice` — Toggle push-to-talk voice dictation
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
+- `/doctor prompt-audit` — Audit CLAUDE.md files, skills, agents, and commands for prompting patterns written for older models (v2.1.283+)
 - `/insights` — Analyze sessions report
 - `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
@@ -195,9 +196,12 @@ updated: 2026-09-23
 - `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` — Override the 2,048-character cap on MCP tool descriptions and server instructions (v2.1.280+)
 - `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
 - `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
+- `availableModelsMatch` — Managed setting; set to `"exact"` so `availableModels` permits only the named model versions (v2.1.283+)
+- `deniedModels` — Managed setting; block specific models even when `availableModels` allows them (v2.1.283+)
 - `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
 - `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
+- `OTEL_LOG_TOOL_CONTENT` — Set to `1` to include tool output in the OpenTelemetry `tool.output` span event; review redaction and retention first (v2.1.283+ for MCP, WebFetch, and WebSearch output)
 - `claude_code.llm_request` — OTel request span includes the applied `effort` level when the model supports effort
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
