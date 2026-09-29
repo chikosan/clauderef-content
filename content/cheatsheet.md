@@ -1,6 +1,6 @@
 ---
-version: 2.1.283
-updated: 2026-09-26
+version: 2.1.284
+updated: 2026-09-29
 ---
 
 ## Keyboard Shortcuts
@@ -86,6 +86,8 @@ updated: 2026-09-26
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
 - `/doctor prompt-audit` — Audit CLAUDE.md files, skills, agents, and commands for prompting patterns written for older models (v2.1.283+)
+- `/mcp reconnect all` — Retry every MCP server that failed to connect or needs authentication (v2.1.284+)
+- `/rate-limit-options` — Show usage-limit options for claude.ai subscribers (v2.1.284+)
 - `/insights` — Analyze sessions report
 - `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
@@ -198,6 +200,7 @@ updated: 2026-09-26
 - `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
 - `availableModelsMatch` — Managed setting; set to `"exact"` so `availableModels` permits only the named model versions (v2.1.283+)
 - `deniedModels` — Managed setting; block specific models even when `availableModels` allows them (v2.1.283+)
+- `effortSlider:decreaseEffort` / `effortSlider:increaseEffort` / `effortSlider:toggleUltracode` — Rebind the `/effort` slider actions in `keybindings.json` (v2.1.284+)
 - `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
 - `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
