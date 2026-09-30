@@ -1,6 +1,6 @@
 ---
-version: 2.1.284
-updated: 2026-09-29
+version: 2.1.285
+updated: 2026-09-30
 ---
 
 ## Keyboard Shortcuts
@@ -133,6 +133,7 @@ updated: 2026-09-29
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
   - Example: `claude plugin install formatter --marketplace your-org` offers to add the marketplace before installing
+  - Example: `claude plugin configure formatter` opens the plugin's options or reports that it declares none
   - Example: `claude plugin update formatter@your-org --json` returns structured automation output
   - Example: review `shownCommand`, then pass its SHA-256 with `--accept-command <sha256>` to approve exactly that command
 - `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
