@@ -39,7 +39,7 @@ bun run validate
 bun run format:check
 ```
 
-The signed external `ci/hetzner` check runs the same checks, dependency auditing, and secret
+The signed external `ci/docker` check runs the same checks, dependency auditing, and secret
 scanning on each pull request's exact head. GitHub Actions validation can be dispatched manually. A
 pull request cannot modify or deploy the private website. The opted-in daily automation can merge
 its own independently reviewed content after exact-head CI passes; external contributions still
