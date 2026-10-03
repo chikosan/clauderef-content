@@ -64,7 +64,7 @@ updated: 2026-09-30
 - `/reload-skills` — Reload skills without restarting the session
 - `/agents` — Show guidance for creating or managing subagents; ask Claude or edit agent files directly
 - `/workflows` — View and manage background multi-agent workflow runs
-- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
+- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [--max-findings n|all|default] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
   - Example: `/review` reviews the current diff
   - Example: `/review high --fix 128` reviews PR #128 at high effort and applies fixes
 - `/ultrareview [PR#]` — Cloud code review — parallel multi-agent analysis
@@ -138,8 +138,8 @@ updated: 2026-09-30
   - Example: review `shownCommand`, then pass its SHA-256 with `--accept-command <sha256>` to approve exactly that command
 - `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
   - Example: `claude plugin eval . --case routing --runs 3` tests one case from the current plugin
-- `claude project purge [path]` — Delete all Claude project state
-  - Example: `claude project purge .` wipes local session/memory for this repo
+- `claude purge [path]` — Delete all Claude project state (`claude project purge` remains a compatibility alias)
+  - Example: `claude purge . --dry-run` previews removal of local session/memory state for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
   - Example: `claude ultrareview HEAD~5..HEAD` review last 5 commits from CI
 - `--model` — Set model
@@ -220,7 +220,7 @@ updated: 2026-09-30
 - `Skill tool` — Discovers built-in slash commands (/init, /review, /security-review, …)
   - Example: auto-invoked when you ask "review my code" or "init project memory"
   - Tip: skills load only when their description matches your prompt
-- `/code-review [effort|ultra] [--fix] [--comment] [target]` — Background code review
+- `/code-review [effort|ultra] [--fix] [--comment] [--max-findings n|all|default] [target]` — Background code review
   - Example: `/code-review high --fix` deep review + auto-apply safe fixes
   - Example: `/code-review low` quick pass on the current diff
 - `/batch` — Large parallel changes (5-30 worktrees)
