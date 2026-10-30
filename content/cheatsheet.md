@@ -1,6 +1,6 @@
 ---
-version: 2.1.288
-updated: 2026-10-03
+version: 2.1.314
+updated: 2026-10-30
 ---
 
 ## Keyboard Shortcuts
@@ -86,6 +86,7 @@ updated: 2026-10-03
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
 - `/doctor prompt-audit` — Audit CLAUDE.md files, skills, agents, and commands for prompting patterns written for older models (v2.1.283+)
+- `/auto-mode-setup` — Guided setup that teaches auto mode about a repository and its trusted environment (v2.1.304+)
 - `/mcp reconnect all` — Retry every MCP server that failed to connect or needs authentication (v2.1.284+)
 - `/rate-limit-options` — Show usage-limit options for claude.ai subscribers (v2.1.284+)
 - `/insights` — Analyze sessions report
@@ -118,6 +119,7 @@ updated: 2026-10-03
 - `claude auth status [--text]` — Report authentication status as JSON, or human-readable text
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
+  - Note: `attach` and `logs` accept part of a session name (v2.1.290+)
 - `claude remote-control` (`claude rc`) — Start a local Remote Control server (subscription login required)
   - Example: `claude remote-control --continue` resumes the most recent Remote Control session
   - Note: the Claude mobile app can start or continue a session on a connected machine
@@ -145,6 +147,9 @@ updated: 2026-10-03
 - `--model` — Set model
   - Note: Claude Opus 5.5 (`claude-opus-5-5`) is the default Opus model in v2.1.280; 1M context, $4/Mtok input, $20/Mtok output, $0.20/Mtok cache reads
   - Example: `--model sonnet-4-20250514` overrides the default model
+- `--advisor <model>` — Enable the server-side advisor tool for this session
+  - Example: `claude --advisor opus` asks a second model for guidance when Claude chooses
+- `--hold-idle-file <path>` / `--max-hold-min <n>` — Keep a self-hosted runner session alive while host processes finish (v2.1.311+)
 - `--restricted` — Run with command/code tools and WebFetch disabled unless explicitly allowed
   - Example: `claude --restricted` keeps file access inside the working directory
 - `--dangerously-skip-permissions` — Bypass permission prompts (use in CI only)
@@ -180,6 +185,7 @@ updated: 2026-10-03
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
+- `onFailure: "block"` — Make a command or HTTP hook block the action when it cannot start, times out, or exits unexpectedly
 - `DirectoryAdded` — Hook event after `/add-dir` or SDK `register_repo_root`
 - `DISABLE_PROMPT_CACHING` — Startup warning when prompt caching is disabled
 - `ANTHROPIC_API_KEY` — API key env var
@@ -195,6 +201,13 @@ updated: 2026-10-03
 - `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
 - `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
 - `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
+- `idleCompaction` — Enable or disable compaction after a long conversation is left idle
+- `autoCompactWindow` — Set how full the context gets before automatic compaction
+- `sandbox.allowNestedUserNamespaces` — Allow sandboxed Linux/WSL2 commands to create user namespaces; this weakens file protections
+- `permissions.blockWritesOutsideWorkingDirectories` — Managed setting that blocks Write, Edit, and NotebookEdit outside working directories
+- `CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS` — Change the token threshold for idle compaction
+- `CLAUDE_CODE_AUTO_MODE_MODEL` — Choose the model used by the client-side auto-mode classifier
+- `CLAUDE_CODE_DISABLE_FILE_MENTIONS` — Pass `@`-mentioned paths instead of file contents to Claude's file tools
 - `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
 - `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` — Override the 2,048-character cap on MCP tool descriptions and server instructions (v2.1.280+)
 - `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
@@ -206,6 +219,7 @@ updated: 2026-10-03
 - `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
 - `OTEL_LOG_TOOL_CONTENT` — Set to `1` to include tool output in the OpenTelemetry `tool.output` span event; review redaction and retention first (v2.1.283+ for MCP, WebFetch, and WebSearch output)
+- `OTEL_LOG_TOOL_DETAILS` — Set to `1` to include tool parameters and names in telemetry; review sensitive inputs before enabling
 - `claude_code.llm_request` — OTel request span includes the applied `effort` level when the model supports effort
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
