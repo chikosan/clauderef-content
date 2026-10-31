@@ -1,6 +1,6 @@
 ---
-version: 2.1.314
-updated: 2026-10-30
+version: 2.1.316
+updated: 2026-10-31
 ---
 
 ## Keyboard Shortcuts
@@ -183,6 +183,7 @@ updated: 2026-10-30
 - `feedbackDrafts` — Control automatic feedback drafts after failures
 - `promptCacheTtl` — Set API/cloud prompt-cache lifetime to `5m` or `1h`
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
+- `sandbox.allowNestedUserNamespaces` — Allow sandboxed Linux/WSL2 commands to create user namespaces; this weakens file protections
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
 - `onFailure: "block"` — Make a command or HTTP hook block the action when it cannot start, times out, or exits unexpectedly
@@ -225,6 +226,8 @@ updated: 2026-10-30
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
 - `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` — Nested subagent layers (default 3; 1 disables nesting)
+- `CLAUDE_CODE_SUBAGENT_EFFORT` — Set the effort level for subagents when no other setting names one
+- `CLAUDE_CODE_DISABLE_ULTRATHINK` — Ignore the `ultrathink` keyword and use explicit effort controls instead
 - `DISABLE_UPDATES` — Block all update paths (pinned CLI in CI)
 
 ## Skills & Agents
