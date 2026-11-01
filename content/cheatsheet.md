@@ -1,6 +1,6 @@
 ---
-version: 2.1.280
-updated: 2026-09-23
+version: 2.1.316
+updated: 2026-10-31
 ---
 
 ## Keyboard Shortcuts
@@ -64,7 +64,7 @@ updated: 2026-09-23
 - `/reload-skills` — Reload skills without restarting the session
 - `/agents` — Show guidance for creating or managing subagents; ask Claude or edit agent files directly
 - `/workflows` — View and manage background multi-agent workflow runs
-- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
+- `/review [low|medium|high|xhigh|max|ultra] [--fix] [--comment] [--max-findings n|all|default] [pr#|branch|path]` — Alias of `/code-review`; review the current diff or a target you pass
   - Example: `/review` reviews the current diff
   - Example: `/review high --fix 128` reviews PR #128 at high effort and applies fixes
 - `/ultrareview [PR#]` — Cloud code review — parallel multi-agent analysis
@@ -85,6 +85,10 @@ updated: 2026-09-23
 - `/voice` — Toggle push-to-talk voice dictation
 - `/doctor` — Full setup checkup (/checkup alias)
   - Example: run first when auth, MCP, or model picker misbehaves
+- `/doctor prompt-audit` — Audit CLAUDE.md files, skills, agents, and commands for prompting patterns written for older models (v2.1.283+)
+- `/auto-mode-setup` — Guided setup that teaches auto mode about a repository and its trusted environment (v2.1.304+)
+- `/mcp reconnect all` — Retry every MCP server that failed to connect or needs authentication (v2.1.284+)
+- `/rate-limit-options` — Show usage-limit options for claude.ai subscribers (v2.1.284+)
 - `/insights` — Analyze sessions report
 - `/team-onboarding` — Build a shareable onboarding guide from the last 30 days of Claude Code usage (subscription plans)
 - `/desktop` — Continue in Desktop app
@@ -115,6 +119,7 @@ updated: 2026-09-23
 - `claude auth status [--text]` — Report authentication status as JSON, or human-readable text
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
+  - Note: `attach` and `logs` accept part of a session name (v2.1.290+)
 - `claude remote-control` (`claude rc`) — Start a local Remote Control server (subscription login required)
   - Example: `claude remote-control --continue` resumes the most recent Remote Control session
   - Note: the Claude mobile app can start or continue a session on a connected machine
@@ -130,17 +135,21 @@ updated: 2026-09-23
 - `claude plugin` — Plugin management
   - Note: marketplace `headersHelper` commands require trust approval and install/update confirmation
   - Example: `claude plugin install formatter --marketplace your-org` offers to add the marketplace before installing
+  - Example: `claude plugin configure formatter` opens the plugin's options or reports that it declares none
   - Example: `claude plugin update formatter@your-org --json` returns structured automation output
   - Example: review `shownCommand`, then pass its SHA-256 with `--accept-command <sha256>` to approve exactly that command
 - `claude plugin eval [target]` — Run and score a plugin's behavioral eval suite (v2.1.269+)
   - Example: `claude plugin eval . --case routing --runs 3` tests one case from the current plugin
-- `claude project purge [path]` — Delete all Claude project state
-  - Example: `claude project purge .` wipes local session/memory for this repo
+- `claude purge [path]` — Delete all Claude project state (`claude project purge` remains a compatibility alias)
+  - Example: `claude purge . --dry-run` previews removal of local session/memory state for this repo
 - `claude ultrareview [target]` — Non-interactive code review (PR / branch / path)
   - Example: `claude ultrareview HEAD~5..HEAD` review last 5 commits from CI
 - `--model` — Set model
   - Note: Claude Opus 5.5 (`claude-opus-5-5`) is the default Opus model in v2.1.280; 1M context, $4/Mtok input, $20/Mtok output, $0.20/Mtok cache reads
   - Example: `--model sonnet-4-20250514` overrides the default model
+- `--advisor <model>` — Enable the server-side advisor tool for this session
+  - Example: `claude --advisor opus` asks a second model for guidance when Claude chooses
+- `--hold-idle-file <path>` / `--max-hold-min <n>` — Keep a self-hosted runner session alive while host processes finish (v2.1.311+)
 - `--restricted` — Run with command/code tools and WebFetch disabled unless explicitly allowed
   - Example: `claude --restricted` keeps file access inside the working directory
 - `--dangerously-skip-permissions` — Bypass permission prompts (use in CI only)
@@ -174,8 +183,10 @@ updated: 2026-09-23
 - `feedbackDrafts` — Control automatic feedback drafts after failures
 - `promptCacheTtl` — Set API/cloud prompt-cache lifetime to `5m` or `1h`
 - `sandbox.network.strictAllowlist` — Deny non-allowlisted hosts for sandboxed commands
+- `sandbox.allowNestedUserNamespaces` — Allow sandboxed Linux/WSL2 commands to create user namespaces; this weakens file protections
 - `hooks: if` — Conditional hooks using permission rule syntax
   - Example: `if: "Edit(src/**/*.ts)"` runs only on TS edits under src
+- `onFailure: "block"` — Make a command or HTTP hook block the action when it cannot start, times out, or exits unexpectedly
 - `DirectoryAdded` — Hook event after `/add-dir` or SDK `register_repo_root`
 - `DISABLE_PROMPT_CACHING` — Startup warning when prompt caching is disabled
 - `ANTHROPIC_API_KEY` — API key env var
@@ -191,18 +202,32 @@ updated: 2026-09-23
 - `CLAUDE_CODE_WEBFETCH_DEADLINE_MS` — WebFetch response deadline (default 300000ms; `0` disables)
 - `MCP_SDK_GENERATION` — Pin the MCP client runtime to `v1` or `v2`; v2 is the default for direct HTTP servers, including Bedrock, Vertex, Foundry, and telemetry-disabled installs in v2.1.274
 - `MCP_PROTOCOL_NEGOTIATION` — Use `auto` to probe HTTP, connector, and stdio servers for MCP 2026-07-28, or `legacy` to skip protocol probing
+- `idleCompaction` — Enable or disable compaction after a long conversation is left idle
+- `autoCompactWindow` — Set how full the context gets before automatic compaction
+- `sandbox.allowNestedUserNamespaces` — Allow sandboxed Linux/WSL2 commands to create user namespaces; this weakens file protections
+- `permissions.blockWritesOutsideWorkingDirectories` — Managed setting that blocks Write, Edit, and NotebookEdit outside working directories
+- `CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS` — Change the token threshold for idle compaction
+- `CLAUDE_CODE_AUTO_MODE_MODEL` — Choose the model used by the client-side auto-mode classifier
+- `CLAUDE_CODE_DISABLE_FILE_MENTIONS` — Pass `@`-mentioned paths instead of file contents to Claude's file tools
 - `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
 - `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` — Override the 2,048-character cap on MCP tool descriptions and server instructions (v2.1.280+)
 - `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
 - `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
+- `availableModelsMatch` — Managed setting; set to `"exact"` so `availableModels` permits only the named model versions (v2.1.283+)
+- `deniedModels` — Managed setting; block specific models even when `availableModels` allows them (v2.1.283+)
+- `effortSlider:decreaseEffort` / `effortSlider:increaseEffort` / `effortSlider:toggleUltracode` — Rebind the `/effort` slider actions in `keybindings.json` (v2.1.284+)
 - `syncClaudeAiSkills` — Set to `false` to stop loading and downloading skills enabled on the signed-in claude.ai account
 - `syncClaudeAiPlugins` — Set to `false` to stop loading and downloading plugins enabled on the signed-in claude.ai account
 - `OTEL_METRICS_INCLUDE_REPOSITORY` — Add `vcs.*` repository identity to telemetry (default false; v2.1.269+)
+- `OTEL_LOG_TOOL_CONTENT` — Set to `1` to include tool output in the OpenTelemetry `tool.output` span event; review redaction and retention first (v2.1.283+ for MCP, WebFetch, and WebSearch output)
+- `OTEL_LOG_TOOL_DETAILS` — Set to `1` to include tool parameters and names in telemetry; review sensitive inputs before enabling
 - `claude_code.llm_request` — OTel request span includes the applied `effort` level when the model supports effort
 - `CLAUDECODE` — Detect CC shell (=1 when running inside Claude Code)
   - Example: `if [ "$CLAUDECODE" = "1" ]; then ...` in your shell rc
 - `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` — Running subagent cap (default 20)
 - `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` — Nested subagent layers (default 3; 1 disables nesting)
+- `CLAUDE_CODE_SUBAGENT_EFFORT` — Set the effort level for subagents when no other setting names one
+- `CLAUDE_CODE_DISABLE_ULTRATHINK` — Ignore the `ultrathink` keyword and use explicit effort controls instead
 - `DISABLE_UPDATES` — Block all update paths (pinned CLI in CI)
 
 ## Skills & Agents
@@ -212,7 +237,7 @@ updated: 2026-09-23
 - `Skill tool` — Discovers built-in slash commands (/init, /review, /security-review, …)
   - Example: auto-invoked when you ask "review my code" or "init project memory"
   - Tip: skills load only when their description matches your prompt
-- `/code-review [effort|ultra] [--fix] [--comment] [target]` — Background code review
+- `/code-review [effort|ultra] [--fix] [--comment] [--max-findings n|all|default] [target]` — Background code review
   - Example: `/code-review high --fix` deep review + auto-apply safe fixes
   - Example: `/code-review low` quick pass on the current diff
 - `/batch` — Large parallel changes (5-30 worktrees)
