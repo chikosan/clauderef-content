@@ -54,9 +54,9 @@ bun run format:check  # prettier must be clean
 `npm run validate` also works. An entry is not "done" until validation passes and its rendered page
 and exact diff are reviewed. For the opted-in daily automation, that review may be independent agent
 review instead of maintainer approval. If required external CI cannot run or fails, stop before
-merge; local checks are not a substitute. The required automatic check is the exact-head
-`ci/docker` status from the current external CI. GitHub Actions validation remains available through
-manual dispatch.
+merge; local checks are not a substitute. The required automatic check is the exact-head `ci/docker`
+status from the current external CI. GitHub Actions validation remains available through manual
+dispatch.
 
 ## Recurring docs check (the discovery loop)
 
