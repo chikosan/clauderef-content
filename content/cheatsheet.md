@@ -1,6 +1,6 @@
 ---
-version: 2.1.316
-updated: 2026-10-31
+version: 2.1.317
+updated: 2026-11-03
 ---
 
 ## Keyboard Shortcuts
@@ -228,6 +228,7 @@ updated: 2026-10-31
 - `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` — Nested subagent layers (default 3; 1 disables nesting)
 - `CLAUDE_CODE_SUBAGENT_EFFORT` — Set the effort level for subagents when no other setting names one
 - `CLAUDE_CODE_DISABLE_ULTRATHINK` — Ignore the `ultrathink` keyword and use explicit effort controls instead
+- `CLAUDE_CODE_DISABLE_NESTED_SESSION_ID` — On a self-hosted runner, make nested `claude -p` sessions reuse the outer session ID and transcript when set to `1` (v2.1.317+)
 - `DISABLE_UPDATES` — Block all update paths (pinned CLI in CI)
 
 ## Skills & Agents
