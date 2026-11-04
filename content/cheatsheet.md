@@ -1,6 +1,6 @@
 ---
-version: 2.1.317
-updated: 2026-11-03
+version: 2.1.318
+updated: 2026-11-04
 ---
 
 ## Keyboard Shortcuts
@@ -117,6 +117,7 @@ updated: 2026-11-03
 - `claude auth login` — Sign in (--sso, --console)
   - Example: `claude auth login --console` for API-console-based sign-in
 - `claude auth status [--text]` — Report authentication status as JSON, or human-readable text
+  - Note: stored `claude.ai` sign-ins include `loginExpiresAt`; `claude -p` JSON includes `credential_expires_at` (v2.1.318+)
 - `claude agents` — List agents
 - `claude attach|logs|stop|respawn|rm` — Inspect and control background sessions
   - Note: `attach` and `logs` accept part of a session name (v2.1.290+)
