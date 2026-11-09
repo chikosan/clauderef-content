@@ -1,6 +1,6 @@
 ---
-version: 2.1.318
-updated: 2026-11-04
+version: 2.1.319
+updated: 2026-11-09
 ---
 
 ## Keyboard Shortcuts
@@ -207,12 +207,16 @@ updated: 2026-11-04
 - `autoCompactWindow` — Set how full the context gets before automatic compaction
 - `sandbox.allowNestedUserNamespaces` — Allow sandboxed Linux/WSL2 commands to create user namespaces; this weakens file protections
 - `permissions.blockWritesOutsideWorkingDirectories` — Managed setting that blocks Write, Edit, and NotebookEdit outside working directories
+- `permissions.denyInsteadOfPrompting` — Managed setting that denies tool calls that would wait for a permission prompt and continues the turn; applies to terminal sessions, subagents, and teammates (v2.1.319+)
 - `CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS` — Change the token threshold for idle compaction
 - `CLAUDE_CODE_AUTO_MODE_MODEL` — Choose the model used by the client-side auto-mode classifier
 - `CLAUDE_CODE_DISABLE_FILE_MENTIONS` — Pass `@`-mentioned paths instead of file contents to Claude's file tools
 - `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` — Bound the first non-interactive turn's wait for connecting MCP servers; `0` skips the wait (v2.1.274+)
 - `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` — Override the 2,048-character cap on MCP tool descriptions and server instructions (v2.1.280+)
 - `CLAUDE_CODE_AUTO_MODE_SERVER` — Set to `0` to opt out of server-side auto-mode classifier checks on Bedrock, Vertex, Foundry, and gateways; temporary setting (v2.1.278+)
+- `CLAUDE_CODE_DISABLE_MCP_TASK_BACKGROUND` — In interactive sessions, wait for an MCP task inside its tool call; automatic backgrounding after two minutes still applies unless `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS=0` (v2.1.319+)
+- `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` — Set the delay before a long-running MCP call moves to a background task; `0` disables automatic backgrounding (v2.1.212+)
+- `CLAUDE_CODE_DISABLE_MCP_TASKS` — Set to `1` to disable MCP tasks in terminal sessions (v2.1.319+)
 - `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY` — Set to `1` when a Claude apps gateway's forward proxy is the only egress boundary; the proxy receives hostnames instead of the gateway resolving them (v2.1.277+)
 - `availableModelsMatch` — Managed setting; set to `"exact"` so `availableModels` permits only the named model versions (v2.1.283+)
 - `deniedModels` — Managed setting; block specific models even when `availableModels` allows them (v2.1.283+)
